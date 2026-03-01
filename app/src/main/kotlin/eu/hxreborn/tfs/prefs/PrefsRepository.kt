@@ -38,15 +38,22 @@ class PrefsRepository(
         value: T,
     ) {
         localPrefs.edit { pref.write(this, value) }
+        pushToRemote { pref.write(this, value) }
+    }
+
+    fun resetAll() {
+        localPrefs.edit { Prefs.all.forEach { it.reset(this) } }
+        pushToRemote { Prefs.all.forEach { it.reset(this) } }
+    }
+
+    private fun pushToRemote(block: SharedPreferences.Editor.() -> Unit) {
         remotePrefs?.let { remote ->
-            runCatching {
-                remote.edit {
-                    pref.write(
-                        this,
-                        value,
-                    )
-                }
-            }.onFailure { log("Failed to push remote pref ${pref.key}", it) }
+            runCatching { remote.edit(action = block) }.onFailure {
+                log(
+                    "Failed to push remote prefs",
+                    it,
+                )
+            }
         }
     }
 
@@ -61,10 +68,20 @@ class PrefsRepository(
         PrefsState(
             swipeEnabled = Prefs.SWIPE_ENABLED.read(localPrefs),
             debugLogs = Prefs.DEBUG_LOGS.read(localPrefs),
+            swipeThresholdPct = Prefs.SWIPE_THRESHOLD_PCT.read(localPrefs),
+            edgeExclusionDp = Prefs.EDGE_EXCLUSION_DP.read(localPrefs),
+            fingerLandingMs = Prefs.FINGER_LANDING_MS.read(localPrefs),
+            cooldownMs = Prefs.COOLDOWN_MS.read(localPrefs),
+            captureMode = CaptureMode.fromKey(Prefs.CAPTURE_MODE.read(localPrefs)),
         )
 }
 
 data class PrefsState(
     val swipeEnabled: Boolean = Prefs.SWIPE_ENABLED.default,
     val debugLogs: Boolean = Prefs.DEBUG_LOGS.default,
+    val swipeThresholdPct: Int = Prefs.SWIPE_THRESHOLD_PCT.default,
+    val edgeExclusionDp: Int = Prefs.EDGE_EXCLUSION_DP.default,
+    val fingerLandingMs: Int = Prefs.FINGER_LANDING_MS.default,
+    val cooldownMs: Int = Prefs.COOLDOWN_MS.default,
+    val captureMode: CaptureMode = CaptureMode.REFLECTION,
 )
