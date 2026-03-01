@@ -1,0 +1,15 @@
+Three Finger Swipe adds a three-finger swipe down gesture to take screenshots on AOSP and Pixel devices.
+
+This is an LSPosed module that hooks into system_server to register a pointer event listener. Simply swipe down with three fingers to capture a screenshot.
+
+Features:
+- Three-finger swipe down to screenshot
+- Companion app with module status and toggle
+- Edge exclusion to avoid conflicts with system gestures
+- Orientation-aware swipe threshold
+- Debug logging for troubleshooting
+
+Requirements:
+- Android 9.0+ (API 28)
+- LSPosed framework (JingMatrix fork recommended)
+- Root access

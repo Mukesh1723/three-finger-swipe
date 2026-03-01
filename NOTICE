@@ -1,0 +1,12 @@
+Three Finger Swipe
+Copyright 2026 hxreborn
+
+This product includes software derived from the AxionOS project
+(RisingOS-Revived/android_frameworks_base-new), specifically the
+three-finger gesture detection logic.
+
+AxionOS is licensed under the Apache License, Version 2.0.
+Copyright 2023-2024 The AxionOS Project.
+
+You may obtain a copy of the Apache License at:
+  http://www.apache.org/licenses/LICENSE-2.0
