@@ -30,8 +30,9 @@ fi
 TAG="v$VERSION"
 
 MAJOR=$(echo "$VERSION" | cut -d. -f1)
-COMMIT_COUNT=$(git rev-list --count HEAD)
-VERSION_CODE=$(( MAJOR * 10000 + COMMIT_COUNT + 1 ))
+MINOR=$(echo "$VERSION" | cut -d. -f2)
+PATCH=$(echo "$VERSION" | cut -d. -f3 | cut -d- -f1)
+VERSION_CODE=$(( MAJOR * 1000000 + MINOR * 1000 + PATCH ))
 
 echo "Version: $VERSION"
 echo "Version code: $VERSION_CODE"
