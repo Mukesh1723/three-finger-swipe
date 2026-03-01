@@ -17,32 +17,14 @@ import com.airbnb.lottie.compose.rememberLottieDynamicProperties
 import com.airbnb.lottie.compose.rememberLottieDynamicProperty
 import eu.hxreborn.tfs.R
 
-private val THEMED_LAYERS =
-    listOf(
-        "Shape Layer 15",
-        "Shape Layer 12",
-        "Shape Layer 11",
-        "Shape Layer 10",
-        "Shape Layer 6",
-        "Shape Layer 5",
-        "Shape Layer 4",
-    )
-
 @Composable
 fun GestureIllustration(modifier: Modifier = Modifier) {
     val primary = MaterialTheme.colorScheme.primary.toArgb()
     val dynamicProperties =
         rememberLottieDynamicProperties(
-            *THEMED_LAYERS
-                .map { layer ->
-                    rememberLottieDynamicProperty(
-                        property = LottieProperty.COLOR,
-                        value = primary,
-                        layer,
-                        "**",
-                        "Fill 1",
-                    )
-                }.toTypedArray(),
+            rememberLottieDynamicProperty(LottieProperty.COLOR, primary, "Shape Layer 4", "Ellipse 1", "Fill 1"),
+            rememberLottieDynamicProperty(LottieProperty.COLOR, primary, "Shape Layer 5", "Ellipse 1", "Fill 1"),
+            rememberLottieDynamicProperty(LottieProperty.COLOR, primary, "Shape Layer 6", "Ellipse 1", "Fill 1"),
         )
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(R.raw.swipe_down_phone),
