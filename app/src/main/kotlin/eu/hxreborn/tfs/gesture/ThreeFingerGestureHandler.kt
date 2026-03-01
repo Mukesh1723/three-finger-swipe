@@ -18,7 +18,6 @@ class ThreeFingerGestureHandler(
     private val prefs: SharedPreferences?,
     private val config: GestureConfig = GestureConfig(),
     private val onSwipeDown: () -> Unit,
-    private val onLongPressSwipeDown: () -> Unit,
     private val onPilfer: () -> Unit = {},
 ) {
     private val displayMetrics = context.applicationContext.resources.displayMetrics
@@ -129,17 +128,9 @@ class ThreeFingerGestureHandler(
         if (!isValidSwipe) return null
 
         val heldDuration = event.eventTime - tracking.startTimeMs
-        val longPressEnabled = readPref(Prefs.LONG_PRESS_ENABLED)
-
         lastTriggerTime = now
-        log(
-            "Swipe fired: held=${heldDuration}ms longPressEnabled=$longPressEnabled threshold=${config.longPressHoldMs}ms",
-        )
-        if (longPressEnabled && heldDuration >= config.longPressHoldMs) {
-            onLongPressSwipeDown()
-        } else {
-            onSwipeDown()
-        }
+        log("Swipe fired: held=${heldDuration}ms threshold=${swipeThreshold.toInt()}px")
+        onSwipeDown()
         return GestureState.Triggered
     }
 
