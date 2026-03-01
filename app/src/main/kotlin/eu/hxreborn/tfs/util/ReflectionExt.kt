@@ -22,9 +22,25 @@ fun Class<*>.findMethodUpward(
         }.getOrNull()
     }
 
+fun Class<*>.findAllMethodsUpward(name: String): List<Method> =
+    generateSequence(this) { it.superclass }
+        .flatMap { cls ->
+            cls.declaredMethods.filter { it.name == name }.onEach { it.isAccessible = true }
+        }.toList()
+
 fun Class<*>.methodAccessible(
     name: String,
     vararg paramTypes: Class<*>,
 ): Method = getDeclaredMethod(name, *paramTypes).apply { isAccessible = true }
 
 fun Any.readField(name: String): Any? = javaClass.findFieldUpward(name)?.get(this)
+
+fun Method.signature(): String =
+    buildString {
+        append(declaringClass.name)
+        append('#')
+        append(name)
+        append('(')
+        append(parameterTypes.joinToString(",") { it.simpleName ?: it.name })
+        append(')')
+    }
