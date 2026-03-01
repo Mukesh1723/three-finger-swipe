@@ -23,7 +23,6 @@ internal object ScreenshotDispatchResolver {
                     target = screenshotTarget,
                     method = it,
                     mode = ScreenshotMode.DirectTakeScreenshot,
-                    displayPolicy = screenshotTarget,
                     handler = handler,
                 )
             }
@@ -37,7 +36,6 @@ internal object ScreenshotDispatchResolver {
                     target = screenshotTarget,
                     method = it,
                     mode = ScreenshotMode.DirectTakeScreenshot,
-                    displayPolicy = screenshotTarget,
                     handler = handler,
                 )
             }
@@ -54,7 +52,6 @@ internal object ScreenshotDispatchResolver {
             target = inputManager,
             method = injectInputEvent,
             mode = ScreenshotMode.InjectSysrqKeyEvent,
-            displayPolicy = screenshotTarget,
             handler = handler,
         )
     }
