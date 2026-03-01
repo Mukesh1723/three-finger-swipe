@@ -1,0 +1,63 @@
+# Gradle
+.gradle/
+**/build/
+.kotlin/
+.kls_database.db
+
+# IDE / Editor
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.code-workspace
+.project
+.settings/
+.classpath
+
+# Claude Code
+.claude/
+
+# Local configuration
+local.properties
+.mcp.json
+*.patch
+.env
+.env.local
+
+# Logs / tmp
+.DS_Store
+.directory
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.db
+
+# Documents (not code)
+*.docx
+*.txt
+!fastlane/metadata/android/**/*.txt
+
+# Native build outputs
+.cxx/
+.externalNativeBuild/
+
+# Generated output
+captures/
+outputs/
+test-output/
+*.apk
+*.aab
+*.aar
+
+# Signing artifacts
+*.jks
+*.keystore
+*.p12
+release.keystore
+
+# Exceptions - keep these tracked
+!gradle/wrapper/gradle-wrapper.properties
+!gradle/libs.versions.toml
