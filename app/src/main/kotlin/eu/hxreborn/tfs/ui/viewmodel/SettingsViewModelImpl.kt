@@ -3,7 +3,7 @@ package eu.hxreborn.tfs.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import eu.hxreborn.tfs.prefs.Prefs
+import eu.hxreborn.tfs.prefs.PrefSpec
 import eu.hxreborn.tfs.prefs.PrefsRepository
 import eu.hxreborn.tfs.prefs.PrefsState
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,14 +20,20 @@ class SettingsViewModelImpl(
             initialValue = PrefsState(),
         )
 
-    override fun setSwipeEnabled(value: Boolean) = repository.save(Prefs.SWIPE_ENABLED, value)
+    override fun <T : Any> savePref(
+        pref: PrefSpec<T>,
+        value: T,
+    ) = repository.save(pref, value)
 
-    override fun setDebugLogs(value: Boolean) = repository.save(Prefs.DEBUG_LOGS, value)
+    override fun resetToDefaults() = repository.resetAll()
 }
 
 class SettingsViewModelFactory(
     private val repository: PrefsRepository,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T = SettingsViewModelImpl(repository) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        require(modelClass.isAssignableFrom(SettingsViewModelImpl::class.java))
+        return SettingsViewModelImpl(repository) as T
+    }
 }

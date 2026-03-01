@@ -1,13 +1,17 @@
 package eu.hxreborn.tfs.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import eu.hxreborn.tfs.prefs.PrefSpec
 import eu.hxreborn.tfs.prefs.PrefsState
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class SettingsViewModel : ViewModel() {
     abstract val uiState: StateFlow<PrefsState>
 
-    abstract fun setSwipeEnabled(value: Boolean)
+    abstract fun <T : Any> savePref(
+        pref: PrefSpec<T>,
+        value: T,
+    )
 
-    abstract fun setDebugLogs(value: Boolean)
+    abstract fun resetToDefaults()
 }

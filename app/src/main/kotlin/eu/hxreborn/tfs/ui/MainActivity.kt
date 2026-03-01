@@ -56,4 +56,9 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
         App.removeServiceListener(serviceListener)
     }
+
+    companion object {
+        @JvmStatic
+        fun isXposedEnabled(): Boolean = false
+    }
 }
