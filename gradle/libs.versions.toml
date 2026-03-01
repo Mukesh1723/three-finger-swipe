@@ -1,0 +1,65 @@
+[versions]
+# Core
+kotlin = "2.3.10"
+agp = "8.10.0"
+composeBom = "2026.01.01"
+
+# libxposed
+libxposedApi = "100"
+libxposedService = "100-1.0.0"
+
+# AndroidX
+activityCompose = "1.12.4"
+lifecycleRuntimeKtx = "2.10.0"
+coreKtx = "1.16.0"
+coreSplashscreen = "1.2.0"
+
+# UI
+material3 = "1.5.0-alpha15"
+lottie = "6.7.1"
+composePreferences = "2.1.1"
+
+# Code quality
+ktlint = "14.0.1"
+
+[libraries]
+# libxposed
+libxposed-api = { module = "io.github.libxposed:api", version.ref = "libxposedApi" }
+libxposed-service = { module = "io.github.libxposed:service", version.ref = "libxposedService" }
+
+# Compose (BOM-managed)
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+
+# AndroidX
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+
+# UI
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
+compose-preferences = { group = "me.zhanghai.compose.preference", name = "preference", version.ref = "composePreferences" }
+
+[bundles]
+compose = [
+  "compose-ui",
+  "compose-material3",
+  "compose-material-icons",
+  "compose-foundation",
+  "compose-ui-tooling-preview",
+]
+compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
