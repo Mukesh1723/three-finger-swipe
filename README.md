@@ -33,8 +33,16 @@ Minimal implementation of three-finger swipe screenshots built on the modern LSP
 ## Features
 
 - Three-finger swipe down to take a screenshot
-- ~~- Long-press then swipe down for region-selective crop (WIP)~~
 - Single-purpose module with just one hook on `system_server`
+- Compatible and complementary with screenshot-related modules like [CaptureSposed](https://github.com/99keshav99/CaptureSposed) and [DisableFlagSecure](https://github.com/Xposed-Modules-Repo/io.github.lsposed.disableflagsecure)
+
+  <details>
+  <summary>Why there are no conflicts</summary>
+
+  This module only hooks `PhoneWindowManager` in `system_server`. Both CaptureSposed and DisableFlagSecure operate on completely different methods, so you can still get the full benefit of either by using this module's three-finger gesture to trigger the screenshot.
+
+  </details>
+
 - Settings UI built with Jetpack Compose and Material 3 Expressive
 - Built on LSPosed API 100 for better stability on recent Android versions than legacy Xposed
 - Free and open source (GPLv3)
@@ -55,7 +63,7 @@ Minimal implementation of three-finger swipe screenshots built on the modern LSP
 
 2. Enable the module in LSPosed and scope it to **System Framework** (`android`)
 3. Reboot your device
-4. Open the app if you want to enable hold-before-swipe or debug logging
+4. Open the app to configure settings or enable debug logging
 
 
 
