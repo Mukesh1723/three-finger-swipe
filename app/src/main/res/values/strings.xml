@@ -6,8 +6,6 @@
   <string name="category_advanced">Advanced</string>
   <string name="pref_swipe_title">Three-finger swipe down</string>
   <string name="pref_swipe_summary">Take a screenshot</string>
-  <string name="pref_long_press_title">Three finger long press</string>
-  <string name="pref_long_press_summary">Press and hold with three fingers and then swipe down to take an area screenshot.</string>
   <string name="pref_debug_title">Debug logging</string>
   <string name="pref_debug_summary">Log gesture recognition details</string>
 </resources>
