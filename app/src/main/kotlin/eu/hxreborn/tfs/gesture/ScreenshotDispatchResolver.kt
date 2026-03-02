@@ -71,7 +71,7 @@ internal object ScreenshotDispatchResolver {
                 return null
             }
 
-        val summary = "SYSRQ[injectInputEvent]"
+        val summary = "SYSRQ ${method.signature()} mode=$INJECT_INPUT_EVENT_MODE_ASYNC"
         log("ScreenshotDispatchResolver: resolved $summary")
 
         return ScreenshotDispatch(
