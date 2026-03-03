@@ -5,19 +5,8 @@ enum class ActionId(
 ) {
     NO_ACTION("no_action"),
     SCREENSHOT("screenshot"),
-    RECENT_APPS("recent_apps"),
-    SEARCH_ASSISTANT("search_assistant"),
-    VOICE_SEARCH("voice_search"),
-    LAUNCH_CAMERA("launch_camera"),
     SCREEN_OFF("screen_off"),
-    LAST_APP("last_app"),
-    KILL_APP("kill_app"),
-    MEDIA_PLAY_PAUSE("media_play_pause"),
     TOGGLE_FLASHLIGHT("toggle_flashlight"),
-    VOLUME_PANEL("volume_panel"),
-    CLEAR_NOTIFICATIONS("clear_notifications"),
-    NOTIFICATION_PANEL("notification_panel"),
-    QS_PANEL("qs_panel"),
     RINGER_MODE("ringer_mode"),
     ;
 

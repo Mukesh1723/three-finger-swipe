@@ -21,6 +21,5 @@ object ActionRegistry {
             ActionId.SCREEN_OFF -> ScreenOffAction(context)
             ActionId.TOGGLE_FLASHLIGHT -> ToggleFlashlightAction(context)
             ActionId.RINGER_MODE -> RingerModeAction(context)
-            else -> StubAction(id)
         }
 }

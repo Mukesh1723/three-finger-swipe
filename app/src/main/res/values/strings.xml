@@ -47,18 +47,7 @@
   <string name="pref_swipe_down_action_title">Action</string>
   <string name="action_no_action">No action</string>
   <string name="action_screenshot">Take screenshot</string>
-  <string name="action_recent_apps">Recent apps switcher</string>
-  <string name="action_search_assistant">Search assistant</string>
-  <string name="action_voice_search">Voice search</string>
-  <string name="action_launch_camera">Launch camera</string>
   <string name="action_screen_off">Turn screen off</string>
-  <string name="action_last_app">Last app</string>
-  <string name="action_kill_app">Kill app</string>
-  <string name="action_media_play_pause">Play / pause music</string>
   <string name="action_toggle_flashlight">Toggle flashlight</string>
-  <string name="action_volume_panel">Toggle volume panel</string>
-  <string name="action_clear_notifications">Clear all notifications</string>
-  <string name="action_notification_panel">Toggle notifications panel</string>
-  <string name="action_qs_panel">Expand QS panel</string>
   <string name="action_ringer_mode">Change ringer mode</string>
 </resources>

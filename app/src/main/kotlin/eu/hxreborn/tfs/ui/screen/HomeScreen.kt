@@ -522,19 +522,8 @@ private fun ActionId.labelRes(): Int =
     when (this) {
         ActionId.NO_ACTION -> R.string.action_no_action
         ActionId.SCREENSHOT -> R.string.action_screenshot
-        ActionId.RECENT_APPS -> R.string.action_recent_apps
-        ActionId.SEARCH_ASSISTANT -> R.string.action_search_assistant
-        ActionId.VOICE_SEARCH -> R.string.action_voice_search
-        ActionId.LAUNCH_CAMERA -> R.string.action_launch_camera
         ActionId.SCREEN_OFF -> R.string.action_screen_off
-        ActionId.LAST_APP -> R.string.action_last_app
-        ActionId.KILL_APP -> R.string.action_kill_app
-        ActionId.MEDIA_PLAY_PAUSE -> R.string.action_media_play_pause
         ActionId.TOGGLE_FLASHLIGHT -> R.string.action_toggle_flashlight
-        ActionId.VOLUME_PANEL -> R.string.action_volume_panel
-        ActionId.CLEAR_NOTIFICATIONS -> R.string.action_clear_notifications
-        ActionId.NOTIFICATION_PANEL -> R.string.action_notification_panel
-        ActionId.QS_PANEL -> R.string.action_qs_panel
         ActionId.RINGER_MODE -> R.string.action_ringer_mode
     }
 
