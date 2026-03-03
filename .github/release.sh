@@ -58,7 +58,7 @@ read -rp "Commit, tag, and push? [y/N] " REPLY
 [[ "$REPLY" =~ ^[Yy]$ ]] || exit 1
 
 git add -A
-git commit -m "chore: release v$VERSION"
+git commit -m "chore(release): v$VERSION"
 git tag -s "$TAG" -m "v$VERSION"
 git push origin main "$TAG"
 # git push mirror main "$TAG"

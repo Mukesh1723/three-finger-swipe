@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    tags: [ 'v*' ]
+    tags: ['v*']
 
 permissions:
   contents: write
@@ -18,30 +18,37 @@ jobs:
 
       - uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: '21'
-          distribution: 'temurin'
-          cache: 'gradle'
+          cache: gradle
+
+      - name: Detect prerelease
+        id: version
+        run: |
+          VERSION_NAME=${GITHUB_REF#refs/tags/v}
+          if [[ "$VERSION_NAME" =~ (rc|alpha|beta) ]]; then
+            echo "prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "prerelease=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Decode signing keystore
         run: echo "${{ secrets.RELEASE_KEYSTORE }}" | base64 -d > app/release.p12
 
       - name: Build libxposed
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: ./gradlew buildLibxposed
+        run: ./gradlew buildLibxposed --no-daemon
 
       - name: Build signed APKs
-        run: |
-          ./gradlew assembleDebugRelease --no-daemon \
-            -PRELEASE_STORE_FILE=${{ github.workspace }}/app/release.p12 \
-            -PRELEASE_STORE_PASSWORD="${{ secrets.RELEASE_STORE_PASSWORD }}" \
-            -PRELEASE_KEY_ALIAS="${{ secrets.RELEASE_KEY_ALIAS }}" \
-            -PRELEASE_KEY_PASSWORD="${{ secrets.RELEASE_KEY_PASSWORD }}"
+        run: ./gradlew assembleDebugRelease --no-daemon --no-configuration-cache
+        env:
+          RELEASE_STORE_FILE: ${{ github.workspace }}/app/release.p12
+          RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
       - name: Generate changelog
         id: cliff
+        continue-on-error: true
         uses: orhun/git-cliff-action@v4
         with:
           config: .github/cliff.toml
@@ -52,8 +59,9 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          prerelease: ${{ steps.version.outputs.prerelease }}
           files: app/build/outputs/apk/**/*.apk
-          body: ${{ steps.cliff.outputs.content }}
+          body: ${{ steps.cliff.outputs.content || '' }}
           draft: false
 
       - name: Cleanup keystore
