@@ -17,7 +17,7 @@
   <string name="pref_cooldown_summary">Minimum time between consecutive screenshots. Prevents accidental rapid-fire captures from a single long swipe.</string>
   <string name="pref_capture_mode_title">Capture mode</string>
   <string name="pref_capture_mode_reflection">System API (recommended)</string>
-  <string name="pref_capture_mode_reflection_desc">System API (recommended)\nUses the platform\'s own screenshot entry point (DisplayPolicy.takeScreenshot). Works on stock and Pixel ROMs.</string>
+  <string name="pref_capture_mode_reflection_desc">System API (recommended)\nUses Android\'s internal screenshot pipeline. Android 11-15 and early 16 use DisplayPolicy; newer Android 16 builds fall back to ScreenshotHelper. Best for stock and Pixel-based ROMs.</string>
   <string name="pref_capture_mode_sysrq">SYSRQ key injection</string>
   <string name="pref_capture_mode_sysrq_desc">SYSRQ key injection\nSimulates a Print Screen key press. Use only if the System API mode does nothing on your ROM. Apps can intercept this key.</string>
   <string name="pref_reset_title">Reset to defaults</string>
@@ -35,7 +35,7 @@
   <string name="value_dp">%1$d dp</string>
   <string name="value_ms">%1$d ms</string>
   <string name="pref_capture_mode_reflection_title">System API (recommended)</string>
-  <string name="pref_capture_mode_reflection_body">Uses the platform\'s own screenshot path (DisplayPolicy.takeScreenshot), the same call the system makes for hardware button screenshots. Leave this selected for stock Android and Pixel-based ROMs.</string>
+  <string name="pref_capture_mode_reflection_body">Uses Android\'s internal screenshot pipeline, the same path the system uses for hardware button screenshots. Android 11-15 and early 16 route this through DisplayPolicy; newer Android 16 builds use ScreenshotHelper instead. Leave this selected for stock Android and Pixel-based ROMs.</string>
   <string name="pref_capture_mode_sysrq_title">SYSRQ key injection</string>
   <string name="pref_capture_mode_sysrq_body">Injects a Print Screen key event. Use this only if the System API mode does not work on your ROM. Some full-screen apps and games may consume the event before the system handles it.</string>
   <string name="reboot_fab_label">Reboot to apply</string>

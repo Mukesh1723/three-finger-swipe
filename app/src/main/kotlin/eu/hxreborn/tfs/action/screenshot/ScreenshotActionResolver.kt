@@ -165,8 +165,11 @@ internal object ScreenshotActionResolver {
     }
 
     // ── ScreenshotHelper path ───────────────────────────────────────────
-    // Some Pixel Android 16 builds do not expose DisplayPolicy.takeScreenshot()
-    // ScreenshotHelper still hits the real system screenshot path
+    // Android 16 moved the hardware screenshot path away from
+    // PhoneWindowManager -> DisplayPolicy on newer QPR builds
+    // (AOSP routes it through KeyGestureController -> ScreenshotHelper).
+    // Some OEM builds still expose DisplayPolicy.takeScreenshot(), so keep that
+    // as the first choice and fall back to ScreenshotHelper when it is gone.
     //
     // Do not use SYSRQ here
     // PhoneWindowManager handles SYSRQ in interceptUnhandledKey(), so the app
@@ -197,7 +200,10 @@ internal object ScreenshotActionResolver {
                 phoneWindowManager.readField("mScreenshotHelper") ?: displayPolicyHelper
                     ?: helperClass.getConstructor(Context::class.java).newInstance(context)
 
-            // takeScreenshot(int source, Handler handler, Consumer<Uri> completion)
+            // Common fallback on Android 14-16 builds that hide DisplayPolicy.
+            // Newer AOSP 16 QPR code uses the ScreenshotRequest overload with
+            // displayId via KeyGestureController; this older overload remains a
+            // practical compatibility target for ROMs that still expose it.
             val method =
                 helperClass.findMethodUpward(
                     "takeScreenshot",
