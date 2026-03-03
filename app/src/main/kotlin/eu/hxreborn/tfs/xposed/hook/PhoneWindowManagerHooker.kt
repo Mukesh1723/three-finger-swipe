@@ -53,8 +53,11 @@ class PhoneWindowManagerHooker : Hooker {
                     cooldownMs = Prefs.COOLDOWN_MS.readOrDefault(p).toLong(),
                 )
             val bindings = PhoneWindowManagerBindings.resolve(phoneWindowManager, captureMode)
-            val actionId = ActionId.fromKey(Prefs.SELECTED_ACTION.readOrDefault(p))
-            val action = ActionRegistry.build(actionId, bindings.screenshotDispatch)
+            val actions =
+                ActionId.entries.associateWith { id ->
+                    ActionRegistry.build(id, bindings.systemContext, bindings.screenshotDispatch)
+                }
+
             // Pilfering blocks the app from receiving touch events during the gesture
             GestureInputMonitor.create()
             val gestureHandler =
@@ -62,7 +65,10 @@ class PhoneWindowManagerHooker : Hooker {
                     context = bindings.systemContext,
                     prefs = p,
                     config = config,
-                    onTrigger = action::execute,
+                    onTrigger = {
+                        val id = ActionId.fromKey(Prefs.SELECTED_ACTION.readOrDefault(p))
+                        actions[id]?.execute()
+                    },
                     onPilfer = { GestureInputMonitor.pilferPointers() },
                 )
             val proxy =

@@ -55,7 +55,7 @@
   <string name="action_last_app">Last app</string>
   <string name="action_kill_app">Kill app</string>
   <string name="action_media_play_pause">Play / pause music</string>
-  <string name="action_toggle_torch">Toggle torch</string>
+  <string name="action_toggle_flashlight">Toggle flashlight</string>
   <string name="action_volume_panel">Toggle volume panel</string>
   <string name="action_clear_notifications">Clear all notifications</string>
   <string name="action_notification_panel">Toggle notifications panel</string>

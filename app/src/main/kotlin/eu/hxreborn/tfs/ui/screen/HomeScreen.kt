@@ -530,7 +530,7 @@ private fun ActionId.labelRes(): Int =
         ActionId.LAST_APP -> R.string.action_last_app
         ActionId.KILL_APP -> R.string.action_kill_app
         ActionId.MEDIA_PLAY_PAUSE -> R.string.action_media_play_pause
-        ActionId.TOGGLE_TORCH -> R.string.action_toggle_torch
+        ActionId.TOGGLE_FLASHLIGHT -> R.string.action_toggle_flashlight
         ActionId.VOLUME_PANEL -> R.string.action_volume_panel
         ActionId.CLEAR_NOTIFICATIONS -> R.string.action_clear_notifications
         ActionId.NOTIFICATION_PANEL -> R.string.action_notification_panel

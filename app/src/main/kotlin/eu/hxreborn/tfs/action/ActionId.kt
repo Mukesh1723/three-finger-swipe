@@ -13,7 +13,7 @@ enum class ActionId(
     LAST_APP("last_app"),
     KILL_APP("kill_app"),
     MEDIA_PLAY_PAUSE("media_play_pause"),
-    TOGGLE_TORCH("toggle_torch"),
+    TOGGLE_FLASHLIGHT("toggle_flashlight"),
     VOLUME_PANEL("volume_panel"),
     CLEAR_NOTIFICATIONS("clear_notifications"),
     NOTIFICATION_PANEL("notification_panel"),
