@@ -59,10 +59,7 @@ internal object ScreenshotActionResolver {
         return dispatch
     }
 
-    // ── SYSRQ path ──────────────────────────────────────────────────────
-    // Fake a screenshot by injecting KEYCODE_SYSRQ
-    // Apps can eat this key first, so this stays a last resort
-
+    // SYSRQ injection, apps can eat it before PWM handles it so last resort only
     private fun resolveSysrq(
         phoneWindowManager: Any,
         handler: Handler,
@@ -100,13 +97,9 @@ internal object ScreenshotActionResolver {
         )
     }
 
-    // ── DisplayPolicy path ──────────────────────────────────────────────
-    // Try the direct framework screenshot path first
-    // This skips app key handling
-    //
-    // AOSP reference:
+    // Same path the system uses for hardware button screenshots, skips app key handling
+    // DisplayPolicy.takeScreenshot() exists from Android 9 to Android 14, removed in 15
     // https://cs.android.com/android/platform/superproject/main/+/main:services/core/java/com/android/server/wm/DisplayPolicy.java
-
     private fun resolveDisplayPolicy(
         phoneWindowManager: Any,
         handler: Handler,
@@ -164,20 +157,8 @@ internal object ScreenshotActionResolver {
         )
     }
 
-    // ── ScreenshotHelper path ───────────────────────────────────────────
-    // Android 16 moved the hardware screenshot path away from
-    // PhoneWindowManager -> DisplayPolicy on newer QPR builds
-    // (AOSP routes it through KeyGestureController -> ScreenshotHelper).
-    // Some OEM builds still expose DisplayPolicy.takeScreenshot(), so keep that
-    // as the first choice and fall back to ScreenshotHelper when it is gone.
-    //
-    // Do not use SYSRQ here
-    // PhoneWindowManager handles SYSRQ in interceptUnhandledKey(), so the app
-    // can eat the key before screenshot handling runs
-    //
-    // AOSP reference:
-    // https://cs.android.com/android/platform/superproject/main/+/main:services/core/java/com/android/server/policy/PhoneWindowManager.java
-
+    // Fallback for Android 15+ where DisplayPolicy.takeScreenshot() is gone
+    // https://cs.android.com/android/platform/superproject/main/+/main:core/java/com/android/internal/util/ScreenshotHelper.java
     private fun resolveScreenshotHelper(
         phoneWindowManager: Any,
         handler: Handler,
@@ -200,10 +181,6 @@ internal object ScreenshotActionResolver {
                 phoneWindowManager.readField("mScreenshotHelper") ?: displayPolicyHelper
                     ?: helperClass.getConstructor(Context::class.java).newInstance(context)
 
-            // Common fallback on Android 14-16 builds that hide DisplayPolicy.
-            // Newer AOSP 16 QPR code uses the ScreenshotRequest overload with
-            // displayId via KeyGestureController; this older overload remains a
-            // practical compatibility target for ROMs that still expose it.
             val method =
                 helperClass.findMethodUpward(
                     "takeScreenshot",
