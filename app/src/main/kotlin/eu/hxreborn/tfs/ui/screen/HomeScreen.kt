@@ -18,8 +18,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bolt
 import androidx.compose.material.icons.outlined.BorderOuter
@@ -469,7 +471,11 @@ private fun ActionPickerDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.pref_action_title)) },
         text = {
-            Column(Modifier.selectableGroup()) {
+            Column(
+                Modifier
+                    .selectableGroup()
+                    .verticalScroll(rememberScrollState()),
+            ) {
                 ActionId.entries.forEach { action ->
                     Row(
                         modifier =
