@@ -46,6 +46,27 @@ class PrefsRepository(
         pushToRemote { Prefs.all.forEach { it.reset(this) } }
     }
 
+    fun restoreState(state: PrefsState) {
+        localPrefs.edit {
+            Prefs.SWIPE_ENABLED.write(this, state.swipeEnabled)
+            Prefs.DEBUG_LOGS.write(this, state.debugLogs)
+            Prefs.SWIPE_THRESHOLD_PCT.write(this, state.swipeThresholdPct)
+            Prefs.EDGE_EXCLUSION_DP.write(this, state.edgeExclusionDp)
+            Prefs.FINGER_LANDING_MS.write(this, state.fingerLandingMs)
+            Prefs.COOLDOWN_MS.write(this, state.cooldownMs)
+            Prefs.CAPTURE_MODE.write(this, state.captureMode.key)
+        }
+        pushToRemote {
+            Prefs.SWIPE_ENABLED.write(this, state.swipeEnabled)
+            Prefs.DEBUG_LOGS.write(this, state.debugLogs)
+            Prefs.SWIPE_THRESHOLD_PCT.write(this, state.swipeThresholdPct)
+            Prefs.EDGE_EXCLUSION_DP.write(this, state.edgeExclusionDp)
+            Prefs.FINGER_LANDING_MS.write(this, state.fingerLandingMs)
+            Prefs.COOLDOWN_MS.write(this, state.cooldownMs)
+            Prefs.CAPTURE_MODE.write(this, state.captureMode.key)
+        }
+    }
+
     private fun pushToRemote(block: SharedPreferences.Editor.() -> Unit) {
         remotePrefs?.let { remote ->
             runCatching { remote.edit(action = block) }.onFailure {

@@ -39,9 +39,19 @@ class IntPref(
     key: String,
     default: Int,
     private val range: IntRange? = null,
+    val step: Int? = null,
 ) : PrefSpec<Int>(key, default) {
+    init {
+        require(step == null || step > 0) { "step must be positive" }
+    }
+
     val sliderRange: ClosedFloatingPointRange<Float>? =
         range?.let { it.first.toFloat()..it.last.toFloat() }
+    val sliderSteps: Int =
+        when {
+            step == null || range == null -> 0
+            else -> ((range.last - range.first) / step) - 1
+        }.coerceAtLeast(0)
 
     override fun read(prefs: SharedPreferences): Int {
         val raw = prefs.getInt(key, default)

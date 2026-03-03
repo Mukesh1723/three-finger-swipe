@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import eu.hxreborn.tfs.prefs.PrefSpec
 import eu.hxreborn.tfs.prefs.PrefsRepository
 import eu.hxreborn.tfs.prefs.PrefsState
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class SettingsViewModelImpl(
@@ -20,12 +22,26 @@ class SettingsViewModelImpl(
             initialValue = PrefsState(),
         )
 
+    private val _pendingReboot = MutableStateFlow(false)
+    override val pendingReboot: StateFlow<Boolean> = _pendingReboot.asStateFlow()
+
     override fun <T : Any> savePref(
         pref: PrefSpec<T>,
         value: T,
-    ) = repository.save(pref, value)
+    ) {
+        repository.save(pref, value)
+        _pendingReboot.value = true
+    }
 
-    override fun resetToDefaults() = repository.resetAll()
+    override fun resetToDefaults() {
+        repository.resetAll()
+        _pendingReboot.value = true
+    }
+
+    override fun restoreState(state: PrefsState) {
+        repository.restoreState(state)
+        _pendingReboot.value = true
+    }
 }
 
 class SettingsViewModelFactory(
