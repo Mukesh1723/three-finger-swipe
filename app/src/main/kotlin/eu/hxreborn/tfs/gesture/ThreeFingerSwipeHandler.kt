@@ -6,6 +6,7 @@ import android.graphics.PointF
 import android.os.SystemClock
 import android.view.InputDevice
 import android.view.MotionEvent
+import eu.hxreborn.tfs.action.ActionId
 import eu.hxreborn.tfs.prefs.Prefs
 import eu.hxreborn.tfs.prefs.readOrDefault
 import eu.hxreborn.tfs.util.log
@@ -35,7 +36,7 @@ class ThreeFingerSwipeHandler(
 
     fun onPointerEvent(event: MotionEvent) {
         if (!event.isTouchscreen) return
-        if (!Prefs.SWIPE_ENABLED.readOrDefault(prefs)) return
+        if (Prefs.SELECTED_ACTION.readOrDefault(prefs) == ActionId.NO_ACTION.key) return
 
         state =
             when (event.actionMasked) {

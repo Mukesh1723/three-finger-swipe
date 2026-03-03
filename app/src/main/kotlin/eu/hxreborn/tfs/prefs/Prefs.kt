@@ -5,7 +5,6 @@ import eu.hxreborn.tfs.ModuleConstants
 object Prefs {
     val GROUP: String = ModuleConstants.prefsGroup
 
-    val SWIPE_ENABLED = BoolPref("swipe_enabled", true)
     val DEBUG_LOGS = BoolPref("debug_logs", false)
 
     val SWIPE_THRESHOLD_PCT = IntPref("swipe_threshold_pct", 14, 5..30, step = 1)
@@ -17,7 +16,6 @@ object Prefs {
 
     val all: List<PrefSpec<*>> =
         listOf(
-            SWIPE_ENABLED,
             DEBUG_LOGS,
             SWIPE_THRESHOLD_PCT,
             EDGE_EXCLUSION_DP,

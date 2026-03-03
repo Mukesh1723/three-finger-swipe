@@ -49,7 +49,6 @@ class PrefsRepository(
 
     fun restoreState(state: PrefsState) {
         localPrefs.edit {
-            Prefs.SWIPE_ENABLED.write(this, state.swipeEnabled)
             Prefs.DEBUG_LOGS.write(this, state.debugLogs)
             Prefs.SWIPE_THRESHOLD_PCT.write(this, state.swipeThresholdPct)
             Prefs.EDGE_EXCLUSION_DP.write(this, state.edgeExclusionDp)
@@ -59,7 +58,6 @@ class PrefsRepository(
             Prefs.SELECTED_ACTION.write(this, state.selectedAction.key)
         }
         pushToRemote {
-            Prefs.SWIPE_ENABLED.write(this, state.swipeEnabled)
             Prefs.DEBUG_LOGS.write(this, state.debugLogs)
             Prefs.SWIPE_THRESHOLD_PCT.write(this, state.swipeThresholdPct)
             Prefs.EDGE_EXCLUSION_DP.write(this, state.edgeExclusionDp)
@@ -90,7 +88,6 @@ class PrefsRepository(
 
     private fun readState() =
         PrefsState(
-            swipeEnabled = Prefs.SWIPE_ENABLED.read(localPrefs),
             debugLogs = Prefs.DEBUG_LOGS.read(localPrefs),
             swipeThresholdPct = Prefs.SWIPE_THRESHOLD_PCT.read(localPrefs),
             edgeExclusionDp = Prefs.EDGE_EXCLUSION_DP.read(localPrefs),
@@ -102,7 +99,6 @@ class PrefsRepository(
 }
 
 data class PrefsState(
-    val swipeEnabled: Boolean = Prefs.SWIPE_ENABLED.default,
     val debugLogs: Boolean = Prefs.DEBUG_LOGS.default,
     val swipeThresholdPct: Int = Prefs.SWIPE_THRESHOLD_PCT.default,
     val edgeExclusionDp: Int = Prefs.EDGE_EXCLUSION_DP.default,
