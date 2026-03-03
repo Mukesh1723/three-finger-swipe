@@ -2,7 +2,7 @@
 <resources>
   <string name="app_name">Three Finger Swipe</string>
   <string name="app_desc">Standalone implementation of three-finger swipe screenshots using the modern LSPosed API</string>
-  <string name="category_screenshot_gesture">Screenshot gesture</string>
+  <string name="category_screenshot_gesture">Gesture</string>
   <string name="category_gesture_tuning">Gesture tuning</string>
   <string name="category_advanced">Advanced</string>
   <string name="pref_swipe_title">Three-finger swipe down</string>
