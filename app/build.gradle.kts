@@ -134,10 +134,7 @@ aboutLibraries {
 afterEvaluate {
     // AboutLibraries' Android variant task emits an empty JSON for release in this project.
     // Reuse the working export task output and package it as generated raw resources instead.
-    val exportTask =
-        tasks.named("exportLibraryDefinitions", AboutLibrariesTask::class.java) {
-            variant = providers.provider { "release" }
-        }
+    val exportTask = tasks.named("exportLibraryDefinitions", AboutLibrariesTask::class.java)
 
     extensions.findByType(com.android.build.gradle.AppExtension::class.java)?.applicationVariants?.configureEach {
         val variant = this
