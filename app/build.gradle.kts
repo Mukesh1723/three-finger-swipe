@@ -1,5 +1,5 @@
-import com.mikepenz.aboutlibraries.plugin.AboutLibrariesCollectorTask
 import com.mikepenz.aboutlibraries.plugin.AboutLibrariesTask
+import org.gradle.api.tasks.Sync
 import java.util.Locale
 
 plugins {
@@ -128,9 +128,17 @@ ktlint {
 
 aboutLibraries {
     registerAndroidTasks = false
+    filterVariants = arrayOf("release")
 }
 
 afterEvaluate {
+    // AboutLibraries' Android variant task emits an empty JSON for release in this project.
+    // Reuse the working export task output and package it as generated raw resources instead.
+    val exportTask =
+        tasks.named("exportLibraryDefinitions", AboutLibrariesTask::class.java) {
+            variant = providers.provider { "release" }
+        }
+
     extensions.findByType(com.android.build.gradle.AppExtension::class.java)?.applicationVariants?.configureEach {
         val variant = this
         val variantName = variant.name
@@ -143,22 +151,14 @@ afterEvaluate {
                 }
             }
 
-        val collectTask =
-            tasks.register("collectDependencies$variantTaskSuffix", AboutLibrariesCollectorTask::class.java) {
-                description = "Collects dependencies for the $variantName AboutLibraries metadata"
-                this.variant = providers.provider { variantName }
-            }
-
         val generatedResDir = layout.buildDirectory.dir("generated/aboutLibraries/$variantName/res")
         val generatedRawDir = generatedResDir.map { it.dir("raw") }
 
         val prepareTask =
-            tasks.register("prepareLibraryDefinitions$variantTaskSuffix", AboutLibrariesTask::class.java) {
-                description = "Generates AboutLibraries metadata for the $variantName variant"
-                group = "Build"
-                this.variant = providers.provider { variantName }
-                resultDirectory.set(generatedRawDir)
-                dependsOn(collectTask)
+            tasks.register("prepareLibraryDefinitions$variantTaskSuffix", Sync::class.java) {
+                from(layout.buildDirectory.file("generated/aboutLibraries/aboutlibraries.json"))
+                into(generatedRawDir)
+                dependsOn(exportTask)
             }
 
         variant.registerGeneratedResFolders(files(generatedResDir).builtBy(prepareTask))
