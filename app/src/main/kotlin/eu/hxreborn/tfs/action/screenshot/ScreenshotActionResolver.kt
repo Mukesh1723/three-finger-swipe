@@ -32,32 +32,23 @@ internal object ScreenshotActionResolver {
         phoneWindowManager: Any,
         handler: Handler,
         captureMode: CaptureMode = CaptureMode.REFLECTION,
-    ): ScreenshotDispatch? {
-        val dispatch =
-            when (captureMode) {
-                CaptureMode.SYSRQ -> {
-                    resolveSysrq(phoneWindowManager, handler)
-                        ?: resolveDisplayPolicy(phoneWindowManager, handler)
-                        ?: resolveScreenshotHelper(
-                            phoneWindowManager,
-                            handler,
-                        )
-                }
-
-                CaptureMode.REFLECTION -> {
-                    resolveDisplayPolicy(phoneWindowManager, handler) ?: resolveScreenshotHelper(
-                        phoneWindowManager,
-                        handler,
-                    )
-                }
+    ): ScreenshotDispatch? =
+        when (captureMode) {
+            CaptureMode.SYSRQ -> {
+                resolveSysrq(phoneWindowManager, handler)
+                    ?: resolveDisplayPolicy(phoneWindowManager, handler)
+                    ?: resolveScreenshotHelper(phoneWindowManager, handler)
             }
-        if (dispatch == null) {
-            log(
-                "ScreenshotActionResolver: no screenshot method found — screenshot unavailable",
-            )
+
+            CaptureMode.REFLECTION -> {
+                resolveDisplayPolicy(phoneWindowManager, handler)
+                    ?: resolveScreenshotHelper(phoneWindowManager, handler)
+            }
+        }.also {
+            if (it == null) {
+                log("ScreenshotActionResolver: no screenshot method found")
+            }
         }
-        return dispatch
-    }
 
     // SYSRQ injection, apps can eat it before PWM handles it so last resort only
     private fun resolveSysrq(

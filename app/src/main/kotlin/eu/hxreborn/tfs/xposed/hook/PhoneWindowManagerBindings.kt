@@ -38,21 +38,21 @@ internal data class PhoneWindowManagerBindings(
 
             val displayPolicy =
                 phoneWindowManager.readField("mDefaultDisplayPolicy") ?: phoneWindowManager
-            val policyHandler = displayPolicy.readField("mHandler") as? Handler
-            if (policyHandler == null) {
-                log(
-                    "PhoneWindowManagerBindings: mHandler unavailable, screenshot dispatch disabled",
-                )
-            }
+            val screenshotDispatch =
+                (displayPolicy.readField("mHandler") as? Handler)?.let {
+                    ScreenshotActionResolver.resolve(phoneWindowManager, it, captureMode)
+                } ?: run {
+                    log(
+                        "PhoneWindowManagerBindings: mHandler unavailable, screenshot dispatch disabled",
+                    )
+                    null
+                }
 
             return PhoneWindowManagerBindings(
                 systemContext = systemContext,
                 pointerListenerClass = pointerListenerClass,
                 pointerRegistration = pointerRegistration,
-                screenshotDispatch =
-                    policyHandler?.let {
-                        ScreenshotActionResolver.resolve(phoneWindowManager, it, captureMode)
-                    },
+                screenshotDispatch = screenshotDispatch,
             )
         }
 

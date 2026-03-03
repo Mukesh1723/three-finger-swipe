@@ -16,7 +16,7 @@ class PrefsRepository(
 
     fun attachRemotePrefs(prefs: SharedPreferences?) {
         remotePrefs = prefs
-        if (prefs != null) syncLocalToRemote()
+        prefs?.let { syncLocalToRemote() }
     }
 
     val state: Flow<PrefsState> =
