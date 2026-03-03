@@ -23,7 +23,7 @@ internal data class PhoneWindowManagerBindings(
 
         fun resolve(
             phoneWindowManager: Any,
-            captureMode: CaptureMode = CaptureMode.REFLECTION,
+            captureMode: CaptureMode = CaptureMode.SYSTEM_API,
         ): PhoneWindowManagerBindings {
             val classLoader = phoneWindowManager.javaClass.classLoader
             val pointerListenerClass = Class.forName(POINTER_LISTENER_NAME, false, classLoader)

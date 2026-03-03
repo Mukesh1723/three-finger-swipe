@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import eu.hxreborn.tfs.action.ActionId
 import eu.hxreborn.tfs.action.ActionRegistry
 import eu.hxreborn.tfs.gesture.GestureConfig
-import eu.hxreborn.tfs.gesture.GestureInputMonitor
 import eu.hxreborn.tfs.gesture.GestureHandler
+import eu.hxreborn.tfs.gesture.GestureInputMonitor
 import eu.hxreborn.tfs.prefs.CaptureMode
 import eu.hxreborn.tfs.prefs.Prefs
 import eu.hxreborn.tfs.prefs.readOrDefault

@@ -11,7 +11,7 @@ object Prefs {
     val EDGE_EXCLUSION_DP = IntPref("edge_exclusion_dp", 50, 0..150)
     val FINGER_LANDING_MS = IntPref("finger_landing_ms", 800, 200..1500, step = 50)
     val COOLDOWN_MS = IntPref("cooldown_ms", 500, 100..2000, step = 50)
-    val CAPTURE_MODE = StringPref("capture_mode", CaptureMode.REFLECTION.key)
+    val CAPTURE_MODE = StringPref("capture_mode", CaptureMode.SYSTEM_API.key)
     val SELECTED_ACTION = StringPref("selected_action", "screenshot")
 
     val all: List<PrefSpec<*>> =

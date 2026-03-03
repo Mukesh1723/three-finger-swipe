@@ -104,6 +104,6 @@ data class PrefsState(
     val edgeExclusionDp: Int = Prefs.EDGE_EXCLUSION_DP.default,
     val fingerLandingMs: Int = Prefs.FINGER_LANDING_MS.default,
     val cooldownMs: Int = Prefs.COOLDOWN_MS.default,
-    val captureMode: CaptureMode = CaptureMode.REFLECTION,
+    val captureMode: CaptureMode = CaptureMode.SYSTEM_API,
     val selectedAction: ActionId = ActionId.SCREENSHOT,
 )

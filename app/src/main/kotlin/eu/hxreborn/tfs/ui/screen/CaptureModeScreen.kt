@@ -54,11 +54,11 @@ fun CaptureModeScreen(
             modifier = Modifier.fillMaxWidth().selectableGroup(),
         ) {
             CaptureModeCard(
-                selected = captureMode == CaptureMode.REFLECTION,
+                selected = captureMode == CaptureMode.SYSTEM_API,
                 title = stringResource(R.string.pref_capture_mode_reflection_title),
                 description = stringResource(R.string.pref_capture_mode_reflection_body),
                 shape = shapeForPosition(2, 0),
-                onClick = { onCaptureModeChange(CaptureMode.REFLECTION) },
+                onClick = { onCaptureModeChange(CaptureMode.SYSTEM_API) },
             )
 
             Spacer(Modifier.height(2.dp))
@@ -120,7 +120,7 @@ private fun CaptureModeCard(
 private fun CaptureModeScreenPreview() {
     AppTheme(useDynamicColor = false) {
         CaptureModeScreen(
-            captureMode = CaptureMode.REFLECTION,
+            captureMode = CaptureMode.SYSTEM_API,
             onCaptureModeChange = {},
             onBack = {},
         )

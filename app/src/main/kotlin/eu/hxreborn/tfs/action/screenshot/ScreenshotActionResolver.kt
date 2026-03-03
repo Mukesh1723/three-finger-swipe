@@ -31,7 +31,7 @@ internal object ScreenshotActionResolver {
     fun resolve(
         phoneWindowManager: Any,
         handler: Handler,
-        captureMode: CaptureMode = CaptureMode.REFLECTION,
+        captureMode: CaptureMode = CaptureMode.SYSTEM_API,
     ): ScreenshotDispatch? =
         when (captureMode) {
             CaptureMode.SYSRQ -> {
@@ -40,7 +40,7 @@ internal object ScreenshotActionResolver {
                     ?: resolveScreenshotHelper(phoneWindowManager, handler)
             }
 
-            CaptureMode.REFLECTION -> {
+            CaptureMode.SYSTEM_API -> {
                 resolveDisplayPolicy(phoneWindowManager, handler)
                     ?: resolveScreenshotHelper(phoneWindowManager, handler)
             }
