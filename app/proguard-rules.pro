@@ -46,6 +46,9 @@
     public static int d(...);
 }
 
+# Optional nullability annotation referenced by a transitive dependency.
+-dontwarn javax.annotation.Nullable
+
 # Obfuscation
 -repackageclasses
 -allowaccessmodification

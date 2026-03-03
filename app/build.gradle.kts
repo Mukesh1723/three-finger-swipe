@@ -1,8 +1,13 @@
+import com.mikepenz.aboutlibraries.plugin.AboutLibrariesCollectorTask
+import com.mikepenz.aboutlibraries.plugin.AboutLibrariesTask
+import java.util.Locale
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.aboutlibraries)
     alias(libs.plugins.ktlint)
 }
 
@@ -17,6 +22,16 @@ android {
         targetSdk = 36
         versionCode = project.findProperty("version.code")?.toString()?.toInt() ?: 10001
         versionName = project.findProperty("version.name")?.toString() ?: "1.0.0"
+
+        buildConfigField(
+            "String",
+            "GIT_HASH",
+            "\"${
+                providers.exec {
+                    commandLine("git", "rev-parse", "--short", "HEAD")
+                }.standardOutput.asText.get().trim()
+            }\"",
+        )
     }
 
     signingConfigs {
@@ -68,6 +83,10 @@ android {
         }
     }
 
+    androidResources {
+        localeFilters += "en"
+    }
+
     lint {
         abortOnError = true
         checkReleaseBuilds = false
@@ -107,7 +126,47 @@ ktlint {
     ignoreFailures.set(false)
 }
 
-tasks.named("preBuild").configure {
+aboutLibraries {
+    registerAndroidTasks = false
+}
+
+afterEvaluate {
+    extensions.findByType(com.android.build.gradle.AppExtension::class.java)?.applicationVariants?.configureEach {
+        val variant = this
+        val variantName = variant.name
+        val variantTaskSuffix =
+            variantName.replaceFirstChar { char ->
+                if (char.isLowerCase()) {
+                    char.titlecase(Locale.ENGLISH)
+                } else {
+                    char.toString()
+                }
+            }
+
+        val collectTask =
+            tasks.register("collectDependencies$variantTaskSuffix", AboutLibrariesCollectorTask::class.java) {
+                description = "Collects dependencies for the $variantName AboutLibraries metadata"
+                this.variant = providers.provider { variantName }
+            }
+
+        val generatedResDir = layout.buildDirectory.dir("generated/aboutLibraries/$variantName/res")
+        val generatedRawDir = generatedResDir.map { it.dir("raw") }
+
+        val prepareTask =
+            tasks.register("prepareLibraryDefinitions$variantTaskSuffix", AboutLibrariesTask::class.java) {
+                description = "Generates AboutLibraries metadata for the $variantName variant"
+                group = "Build"
+                this.variant = providers.provider { variantName }
+                resultDirectory.set(generatedRawDir)
+                dependsOn(collectTask)
+            }
+
+        variant.registerGeneratedResFolders(files(generatedResDir).builtBy(prepareTask))
+        variant.mergeResourcesProvider.configure { this.dependsOn(prepareTask) }
+    }
+}
+
+tasks.named("check").configure {
     dependsOn("ktlintCheck")
 }
 
@@ -136,4 +195,8 @@ dependencies {
     // UI
     implementation(libs.lottie.compose)
     implementation(libs.compose.preferences)
+
+    // About
+    implementation(libs.aboutlibraries.core)
+    implementation(libs.aboutlibraries.compose)
 }
