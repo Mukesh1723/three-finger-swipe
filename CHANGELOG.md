@@ -3,7 +3,7 @@
 
 ### Added
 
-- Implement screen off, flashlight, and ringer mode actions
+- Implement screen off, flashlight, and ringer mode actions by @hxreborn
 - Initial scaffold for more features by @hxreborn
 - Add About screen with Material You header and Licenses screen by @hxreborn
 - Replace single settings screen with multi-screen navigation by @hxreborn
@@ -30,11 +30,11 @@
 
 ### Changed
 
-- Remove stub actions and unused action IDs
-- Source GestureConfig defaults from Prefs
-- Align generic action naming
-- Rename CaptureMode.REFLECTION to SYSTEM_API
-- Replace null checks with idiomatic Kotlin scope functions
+- Remove stub actions and unused action IDs by @hxreborn
+- Source GestureConfig defaults from Prefs by @hxreborn
+- Align generic action naming by @hxreborn
+- Rename CaptureMode.REFLECTION to SYSTEM_API by @hxreborn
+- Replace null checks with idiomatic Kotlin scope functions by @hxreborn
 - Rename ThreeFingerSwipeHandler to GestureHandler by @hxreborn
 - Remove SWIPE_ENABLED, use NO_ACTION to disable gesture by @hxreborn
 - Trim screenshot dispatch helpers by @hxreborn
